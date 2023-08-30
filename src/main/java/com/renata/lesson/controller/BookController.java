@@ -33,7 +33,7 @@ public class BookController {
         model.addAttribute("book", bookDao.getBook(id));
 
         Person p = bookDao.getBookOwner(id);
-        if(p!=null)
+        if (p != null)
             model.addAttribute("owner", p);
         else
             model.addAttribute("people", personDao.getPersons());
@@ -42,44 +42,44 @@ public class BookController {
 
     @GetMapping("/new")
     public String newBook(Model model) {
-        model.addAttribute("newBook", new Book());                 //create1
+        model.addAttribute("newBook", new Book());
         return "books/new";
     }
 
     @PostMapping()
     public String createBook(@ModelAttribute("newBook") Book book) {
-        bookDao.createBook(book);                                            //create2
+        bookDao.createBook(book);
         return "redirect:/books";
     }
 
     @GetMapping("/{id}/edit")
     public String editBook(Model model, @PathVariable("id") int id) {
         model.addAttribute("updateBook", bookDao.getBook(id));
-        return "books/edit";                                                      //update1
+        return "books/edit";
     }
 
     @PatchMapping("/{id}")
     public String updateBook(@ModelAttribute("updateBook") Book book, @PathVariable("id") int id) {
         bookDao.updateBook(id, book);
-        return "redirect:/books";                                              //update2
+        return "redirect:/books";
     }
 
     @DeleteMapping("/{id}")
     public String deleteBook(@PathVariable("id") int id) {
         bookDao.deleteBook(id);
-        return "redirect:/books";                                              //delete
+        return "redirect:/books";
     }
 
     @PatchMapping("/{id}/release")
-    public String release(@PathVariable ("id") int id) {
+    public String release(@PathVariable("id") int id) {
         bookDao.release(id);
-        return "redirect:/books/"+id;
+        return "redirect:/books/" + id;
     }
 
     @PatchMapping("/{id}/assign")
-    public String assign(@PathVariable ("id") int id, @ModelAttribute("person") Person p) {
-        bookDao.assign(id,p);
-        return "redirect:/books/"+id;
+    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person p) {
+        bookDao.assign(id, p);
+        return "redirect:/books/" + id;
     }
 }
 

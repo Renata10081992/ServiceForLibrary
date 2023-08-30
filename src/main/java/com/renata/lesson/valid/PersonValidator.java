@@ -6,6 +6,7 @@ import com.renata.lesson.model.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
 @Component
 public class PersonValidator implements Validator {
 
@@ -22,7 +23,7 @@ public class PersonValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        Person person= (Person) target;
+        Person person = (Person) target;
         if (personDao.getPersonByFullName(person.getFullName()) != null) {
             errors.rejectValue("fullName", "", "This fullName is already taken");
         }

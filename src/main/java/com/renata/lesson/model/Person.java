@@ -1,16 +1,28 @@
 package com.renata.lesson.model;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public class Person {
 
     private int id;
-    @NotEmpty(message = "name not should be empty")
-    @Size(min=2, max=30, message= "name should be between 2 and 30 chars")
+    @NotEmpty(message = "Имя не может быть пустым")
+    @Size(min = 2, max = 30, message = "Длина должна быть от 2 до 30 символов")
     private String fullName;
-    @NotEmpty
-    @Pattern(regexp = "\\d{2}.\\d{2}.\\d{4}", message = "format is 00.00.0000")
+    @Min(value = 1900, message = "Год должен быть больше 1900")
+    @Max(value = 2023, message = "Год должен быть меньше 2023")
     private int yearOfBorn;
+
+    public Person() {
+
+    }
+
+    public Person(String fullName, int yearOfBorn) {
+        this.fullName = fullName;
+        this.yearOfBorn = yearOfBorn;
+    }
 
     public int getId() {
         return id;

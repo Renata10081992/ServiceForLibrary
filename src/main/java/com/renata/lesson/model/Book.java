@@ -10,14 +10,23 @@ public class Book {
     private int idBook;
     private int idPerson;
 
-    @NotEmpty(message = "name not should be empty")
-    @Size(min=2, max=50, message= "name should bw between 2 and 50 chars")
+    @NotEmpty(message = "Название не может быть пустым")
+    @Size(min = 2, max = 50, message = "Длина должна быть от 2 до 50 символов")
     private String title;
-    @NotEmpty(message = "name not should be empty")
+    @NotEmpty(message = "Имя не может быть пустым")
     private String author;
-    @Min(value=1, message= "not minus, only >0")
-    @Max(value = 2023, message= "not > 2023")
+    @Min(value = 1500, message = "Не ранее 1500 года издания")
+    @Max(value = 2023, message = "Не позднее 2023 года издания")
     private int yearOfPublish;
+
+    public Book() {
+    }
+
+    public Book(String title, String author, int yearOfPublish) {
+        this.title = title;
+        this.author = author;
+        this.yearOfPublish = yearOfPublish;
+    }
 
     public int getIdBook() {
         return idBook;
